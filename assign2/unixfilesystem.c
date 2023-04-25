@@ -12,17 +12,20 @@
 struct unixfilesystem *unixfilesystem_init(int dfd) {
   // Validate the bootblock.  This will catch the situation where something 
   // other than a descriptor to a valid diskimg is passed in.
+  // store boot block(512 bytes)
   uint16_t bootblock[256];
   if (diskimg_readsector(dfd, BOOTBLOCK_SECTOR, bootblock) != DISKIMG_SECTOR_SIZE) {
     fprintf(stderr, "Error reading bootblock\n");
     return NULL;
   }
 
+  // check boot block
   if (bootblock[0] != BOOTBLOCK_MAGIC_NUM) {
     fprintf(stderr, "Bad magic number on disk(0x%x)\n", bootblock[0]);
     return NULL;
   }
 
+  // check struct filesys equs 512 bytes
   if (sizeof(struct filsys) != DISKIMG_SECTOR_SIZE) { 
     fprintf(stderr, "Warning: Superblock structure size (%zu) != SECTOR_SIZE\n",
             sizeof(struct filsys));
@@ -35,6 +38,7 @@ struct unixfilesystem *unixfilesystem_init(int dfd) {
   }
 
   fs->dfd = dfd;  
+  // read super block
   if (diskimg_readsector(dfd, SUPERBLOCK_SECTOR, &fs->superblock) != DISKIMG_SECTOR_SIZE) {
     fprintf(stderr, "Error reading superblock\n");
     free(fs);

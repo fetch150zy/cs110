@@ -19,11 +19,11 @@
  * Block 2 + s_isize : The rest of the blocks on disk.
  */
 
-#define BOOTBLOCK_SECTOR    0
-#define SUPERBLOCK_SECTOR   1
-#define INODE_START_SECTOR  2
+#define BOOTBLOCK_SECTOR    0       // for boot block
+#define SUPERBLOCK_SECTOR   1       // for super block
+#define INODE_START_SECTOR  2       // inode start block
 #define ROOT_INUMBER        1
-#define BOOTBLOCK_MAGIC_NUM 0407
+#define BOOTBLOCK_MAGIC_NUM 0407    // for check boot block
 
 struct unixfilesystem {
   int dfd; // Handle from the diskimg module to read the diskimg.

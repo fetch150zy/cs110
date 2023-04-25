@@ -3,6 +3,9 @@
 
 #include "unixfilesystem.h"
 
+#define INODES_PRE_BLOCK (DISKIMG_SECTOR_SIZE / sizeof(struct inode))
+#define ADDRS_PRE_BLOCK (DISKIMG_SECTOR_SIZE / sizeof(uint16_t))
+
 /**
  * Fetches the specified inode from the filesystem. 
  * Returns 0 on success, -1 on error.  

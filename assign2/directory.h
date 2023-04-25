@@ -4,6 +4,8 @@
 #include "unixfilesystem.h"
 #include "direntv6.h"
 
+#define DIRS_PRE_BLOCK (DISKIMG_SECTOR_SIZE / sizeof(struct direntv6))
+
 /**
  * Looks up the specified name (name) in the specified directory (dirinumber).  
  * If found, return the directory entry in space addressed by dirEnt.  Returns 0 

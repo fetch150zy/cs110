@@ -17,6 +17,7 @@
  * routines for free list and I list.
  */
 
+// a block(sector), 512bytes
 struct filsys {
   uint16_t	s_isize;	// size in blocks of I list
   uint16_t	s_fsize;	// size in blocks of entire volume
